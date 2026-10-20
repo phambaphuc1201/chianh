@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ch├║c Mß╗½ng 20/10 - Th╞░ Tß╗½ B├í Ph├║c Gß╗¡i Chß╗ï ├ünh ≡ƒî╕</title>
+  <title>Chúc Mừng 20/10 - Thư Từ Bá Phúc Gửi Chị Ánh 🌸</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -33,14 +33,14 @@
       position: relative;
     }
 
-    /* Hiß╗çu ß╗⌐ng c├ính hoa v├á ng├┤i sao r╞íi m╞░ß╗út m├á */
+    /* Hiệu ứng cánh hoa và ngôi sao rơi mượt mà */
     .bg-canvas {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 1;
     }
 
-    /* N├║t nhß║íc nß╗òi g├│c m├án h├¼nh */
+    /* Nút nhạc nổi góc màn hình */
     .music-btn {
       position: fixed; top: 20px; right: 20px; z-index: 999;
       width: 48px; height: 48px; border-radius: 50%;
@@ -54,7 +54,7 @@
     .music-btn.playing { animation: spin 3.5s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* M├¿o Mew Mew ß╗ƒ g├│c m├án h├¼nh */
+    /* Mèo Mew Mew ở góc màn hình */
     .corner-cat {
       position: fixed; bottom: 20px; left: 20px; z-index: 99;
       display: flex; align-items: flex-end; gap: 8px; cursor: pointer;
@@ -109,7 +109,7 @@
       animation: fadeInUp 0.8s ease-out 0.5s backwards;
     }
 
-    /* Hß╗Öp qu├á t╞░╞íng t├íc */
+    /* Hộp quà tương tác */
     .gift-container {
       position: relative; display: inline-flex; flex-direction: column;
       align-items: center; margin-bottom: 35px; cursor: pointer;
@@ -187,7 +187,7 @@
     .wish-title { font-size: 1.35rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; }
     .wish-text { font-size: 0.98rem; color: var(--text-muted); line-height: 1.65; }
 
-    /* Modal mß╗ƒ thiß╗çp */
+    /* Modal mở thiệp */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(6px); z-index: 1000;
@@ -241,7 +241,7 @@
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-25px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Lß╗£I NHß║«N NHß╗ª BASE STYLES */
+    /* LỜI NHẮN NHỦ BASE STYLES */
     .note-card {
       max-width: 800px; width: 100%; background: white;
       padding: 45px 35px; border-radius: 26px;
@@ -255,7 +255,7 @@
       color: var(--primary-dark); font-weight: 700; margin-bottom: 22px;
     }
 
-    /* Tß╗ÉI ╞»U TO├ÇN DIß╗åN CHO ─ÉIß╗åN THOß║áI & FORM THIß╗åP */
+    /* TỐI ƯU TOÀN DIỆN CHO ĐIỆN THOẠI & FORM THIỆP */
     @media (max-width: 768px) {
       .hero {
         padding: 70px 16px 35px;
@@ -358,7 +358,7 @@
         margin-bottom: 18px;
       }
 
-      /* FORM THIß╗åP Mß╗₧ QU├Ç TR├èN ─ÉIß╗åN THOß║áI */
+      /* FORM THIỆP MỞ QUÀ TRÊN ĐIỆN THOẠI */
       .modal-overlay {
         padding: 12px;
         align-items: center;
@@ -422,138 +422,138 @@
 </head>
 <body>
 
-  <!-- N├║t nhß║íc nß╗ün -->
-  <button id="musicToggle" class="music-btn" title="Bß║¡t/Tß║»t nhß║íc nß╗ün">
-    <span id="musicIcon">≡ƒÄ╡</span>
+  <!-- Nút nhạc nền -->
+  <button id="musicToggle" class="music-btn" title="Bật/Tắt nhạc nền">
+    <span id="musicIcon">🎵</span>
   </button>
   <audio id="bgMusic" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- M├¿o Mew Mew t╞░╞íng t├íc ß╗ƒ g├│c m├án h├¼nh -->
+  <!-- Mèo Mew Mew tương tác ở góc màn hình -->
   <div class="corner-cat" id="cornerCat" onclick="catInteract()">
     <img src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew Cat">
-    <div class="cat-bubble" id="catSpeech">Ch├áo chß╗ï ├ünh! Ch├║c chß╗ï 20/10 vui vß║╗ nha! ≡ƒÉ╛</div>
+    <div class="cat-bubble" id="catSpeech">Chào chị Ánh! Chúc chị 20/10 vui vẻ nha! 🐾</div>
   </div>
 
-  <!-- C├ính hoa r╞íi Canvas -->
+  <!-- Cánh hoa rơi Canvas -->
   <canvas id="petalCanvas" class="bg-canvas"></canvas>
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="badge-date">Γ£¿ 20 Th├íng 10 ΓÇó Lß╗¥i Ch├║c Tß╗½ B├í Ph├║c Γ£¿</div>
-    <h1 class="title">Ch├║c Mß╗½ng Ng├áy 20/10</h1>
-    <h2 class="subtitle">Gß╗¡i <span id="displayFriendName">Chß╗ï ├ünh</span>! ≡ƒî╕</h2>
+    <div class="badge-date">✨ 20 Tháng 10 • Lời Chúc Từ Bá Phúc ✨</div>
+    <h1 class="title">Chúc Mừng Ngày 20/10</h1>
+    <h2 class="subtitle">Gửi <span id="displayFriendName">Chị Ánh</span>! 🌸</h2>
 
     <p class="message-hero">
-      Ch├║c chß╗ï ├ünh mß╗Öt ng├áy 20/10 ngß║¡p tr├án niß╗üm vui, nß╗Ñ c╞░ß╗¥i lu├┤n rß║íng rß╗í, lu├┤n t╞░╞íi trß║╗ v├á hß║ính ph├║c tr├¬n mß╗ìi chß║╖ng ─æ╞░ß╗¥ng nh├⌐! Γ£¿
+      Chúc chị Ánh một ngày 20/10 ngập tràn niềm vui, nụ cười luôn rạng rỡ, luôn tươi trẻ và hạnh phúc trên mọi chặng đường nhé! ✨
     </p>
 
-    <!-- Hß╗Öp qu├á t╞░╞íng t├íc vß╗¢i ß║únh giftbox.png v├á mewmew.gif -->
-    <div class="gift-container" id="giftBoxBtn" title="Bß║Ñm v├áo ─æß╗â mß╗ƒ qu├á bß║Ñt ngß╗¥!">
+    <!-- Hộp quà tương tác với ảnh giftbox.png và mewmew.gif -->
+    <div class="gift-container" id="giftBoxBtn" title="Bấm vào để mở quà bất ngờ!">
       <div class="gift-box-animate">
-        <img src="image/giftbox.png" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/giftbox.png'" alt="Hß╗Öp qu├á 20/10">
+        <img src="image/giftbox.png" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/giftbox.png'" alt="Hộp quà 20/10">
         <img class="cat-companion" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
       </div>
       <div class="gift-tag">
-        <span>≡ƒÄü Nhß║Ñp ─æß╗â mß╗ƒ thiß╗çp d├ánh cho chß╗ï ├ünh!</span>
+        <span>🎁 Nhấp để mở thiệp dành cho chị Ánh!</span>
       </div>
     </div>
 
     <!-- Navigation -->
     <div class="nav-buttons">
-      <a href="#wishes" class="nav-button btn-wishes"><span>≡ƒÆî Lß╗¥i Ch├║c 20/10</span></a>
-      <a href="#friendship" class="nav-button btn-fun"><span>≡ƒîƒ Lß╗¥i Nhß║»n Nhß╗º</span></a>
+      <a href="#wishes" class="nav-button btn-wishes"><span>💌 Lời Chúc 20/10</span></a>
+      <a href="#friendship" class="nav-button btn-fun"><span>🌟 Lời Nhắn Nhủ</span></a>
     </div>
   </section>
 
-  <!-- Lß╗£I CH├ÜC D├ÇNH CHO CHß╗è ├üNH -->
+  <!-- LỜI CHÚC DÀNH CHO CHỊ ÁNH -->
   <section class="section" id="wishes">
-    <h2 class="section-title">Lß╗¥i Ch├║c D├ánh Cho Chß╗ï ├ünh</h2>
-    <p class="section-desc">Gß╗¡i trß╗ìn nhß╗»ng ─æiß╗üu ngß╗ìt ng├áo v├á tuyß╗çt vß╗¥i nhß║Ñt ─æß║┐n chß╗ï ├ünh nh├ón ng├áy Phß╗Ñ nß╗» Viß╗çt Nam! ≡ƒî╕</p>
+    <h2 class="section-title">Lời Chúc Dành Cho Chị Ánh</h2>
+    <p class="section-desc">Gửi trọn những điều ngọt ngào và tuyệt vời nhất đến chị Ánh nhân ngày Phụ nữ Việt Nam! 🌸</p>
 
     <div class="wishes-grid">
       <div class="wish-card" onclick="cardPop(this)">
-        <div class="wish-icon">≡ƒºï</div>
-        <h3 class="wish-title">Tr├á Sß╗»a Kh├┤ng B├⌐o</h3>
-        <p class="wish-text">Uß╗æng bao nhi├¬u ly tr├á sß╗»a full-topping c┼⌐ng kh├┤ng sß╗ú t─âng c├ón, ─ân ngon ngß╗º kß╗╣ v├á t├óm hß╗ôn l├║c n├áo c┼⌐ng ph╞íi phß╗¢i!</p>
+        <div class="wish-icon">🧋</div>
+        <h3 class="wish-title">Trà Sữa Không Béo</h3>
+        <p class="wish-text">Uống bao nhiêu ly trà sữa full-topping cũng không sợ tăng cân, ăn ngon ngủ kỹ và tâm hồn lúc nào cũng phơi phới!</p>
       </div>
 
       <div class="wish-card" onclick="cardPop(this)">
-        <div class="wish-icon">≡ƒÆ»</div>
-        <h3 class="wish-title">Deadline Tß╗▒ Biß║┐n Mß║Ñt</h3>
-        <p class="wish-text">C├┤ng viß╗çc hanh th├┤ng thuß║¡n lß╗úi, sß║┐p qu├╜ ─æß╗ông nghiß╗çp th╞░╞íng, mß╗ìi sß╗▒ may mß║»n v├á deadline tß╗▒ ─æß╗Öng ho├án th├ánh!</p>
+        <div class="wish-icon">💯</div>
+        <h3 class="wish-title">Deadline Tự Biến Mất</h3>
+        <p class="wish-text">Công việc hanh thông thuận lợi, sếp quý đồng nghiệp thương, mọi sự may mắn và deadline tự động hoàn thành!</p>
       </div>
 
       <div class="wish-card" onclick="cardPop(this)">
-        <div class="wish-icon">≡ƒÆ╕</div>
-        <h3 class="wish-title">V├¡ Tiß╗ün D├áy Cß╗Öm</h3>
-        <p class="wish-text">T├ái khoß║ún l├║c n├áo c┼⌐ng 'ting ting', may mß║»n ngß║¡p tr├án, tha hß╗ô shopping, du lß╗ïch mu├┤n n╞íi m├á kh├┤ng cß║ºn nh├¼n gi├í!</p>
+        <div class="wish-icon">💸</div>
+        <h3 class="wish-title">Ví Tiền Dày Cộm</h3>
+        <p class="wish-text">Tài khoản lúc nào cũng 'ting ting', may mắn ngập tràn, tha hồ shopping, du lịch muôn nơi mà không cần nhìn giá!</p>
       </div>
 
       <div class="wish-card" onclick="cardPop(this)">
-        <div class="wish-icon">≡ƒÆû</div>
-        <h3 class="wish-title">Lu├┤n ─É╞░ß╗úc Y├¬u Th╞░╞íng</h3>
-        <p class="wish-text">Lu├┤n ─æ╞░ß╗úc y├¬u th╞░╞íng, n├óng niu, trß║╗ m├úi kh├┤ng gi├á v├á ─æ├│n nhß║¡n nhß╗»ng ─æiß╗üu ngß╗ìt ng├áo nhß║Ñt cß╗ºa cuß╗Öc sß╗æng!</p>
+        <div class="wish-icon">💖</div>
+        <h3 class="wish-title">Luôn Được Yêu Thương</h3>
+        <p class="wish-text">Luôn được yêu thương, nâng niu, trẻ mãi không già và đón nhận những điều ngọt ngào nhất của cuộc sống!</p>
       </div>
 
       <div class="wish-card" onclick="cardPop(this)">
-        <div class="wish-icon">≡ƒîê</div>
-        <h3 class="wish-title">Lu├┤n Vui Vß║╗ & Rß║íng Rß╗í</h3>
-        <p class="wish-text">Mß╗ùi ng├áy tr├┤i qua ─æß╗üu l├á mß╗Öt ng├áy ├╜ ngh─⌐a, bß╗¢t quß║íu, bß╗¢t lo toan v├á lu├┤n nß╗ƒ nß╗Ñ c╞░ß╗¥i thß║¡t t╞░╞íi!</p>
+        <div class="wish-icon">🌈</div>
+        <h3 class="wish-title">Luôn Vui Vẻ & Rạng Rỡ</h3>
+        <p class="wish-text">Mỗi ngày trôi qua đều là một ngày ý nghĩa, bớt quạu, bớt lo toan và luôn nở nụ cười thật tươi!</p>
       </div>
     </div>
 
-    <a href="#home" class="back-button">Γ¼å Vß╗ü ─Éß║ºu Trang</a>
+    <a href="#home" class="back-button">⬆ Về Đầu Trang</a>
   </section>
 
-  <!-- Lß╗£I NHß║«N NHß╗ª -->
+  <!-- LỜI NHẮN NHỦ -->
   <section class="section" id="friendship">
-    <h2 class="section-title">Nhß║»n Nhß╗º ─É├┤i Lß╗¥i ≡ƒîƒ</h2>
+    <h2 class="section-title">Nhắn Nhủ Đôi Lời 🌟</h2>
     <div class="note-card">
       <p class="note-text">
-        Gß╗¡i <strong id="friendNameNote" style="color: var(--primary-dark);">chß╗ï ├ünh</strong>, cß║úm ╞ín chß╗ï v├¼ ─æ├ú lu├┤n l├á mß╗Öt ng╞░ß╗¥i chß╗ï dß╗à th╞░╞íng, nhiß╗çt t├¼nh v├á ngß║¡p tr├án n─âng l╞░ß╗úng t├¡ch cß╗▒c!
+        Gửi <strong id="friendNameNote" style="color: var(--primary-dark);">chị Ánh</strong>, cảm ơn chị vì đã luôn là một người chị dễ thương, nhiệt tình và ngập tràn năng lượng tích cực!
       </p>
       <p class="note-text">
-        Nh├ón dß╗ïp 20/10, em ch├║c chß╗ï lu├┤n giß╗» ─æ╞░ß╗úc nß╗Ñ c╞░ß╗¥i rß║íng rß╗í, ng├áy c├áng trß║╗ ─æß║╣p, th├ánh c├┤ng trong c├┤ng viß╗çc v├á hß║ính ph├║c trong cuß╗Öc sß╗æng. H├úy nhß╗¢ rß║▒ng chß╗ï lu├┤n xß╗⌐ng ─æ├íng vß╗¢i nhß╗»ng ─æiß╗üu tß╗æt ─æß║╣p nhß║Ñt trong cuß╗Öc sß╗æng n├áy!
+        Nhân dịp 20/10, em chúc chị luôn giữ được nụ cười rạng rỡ, ngày càng trẻ đẹp, thành công trong công việc và hạnh phúc trong cuộc sống. Hãy nhớ rằng chị luôn xứng đáng với những điều tốt đẹp nhất trong cuộc sống này!
       </p>
       <div class="note-author">
-        ΓÇö Ng╞░ß╗¥i gß╗¡i: B├í Ph├║c ≡ƒÆû ΓÇö
+        — Người gửi: Bá Phúc 💖 —
       </div>
-      <button class="modal-btn" onclick="triggerFireworks()">≡ƒÄë Bß║»n Ph├ío Hoa Ch├║c Mß╗½ng 20/10 ≡ƒÄë</button>
+      <button class="modal-btn" onclick="triggerFireworks()">🎉 Bắn Pháo Hoa Chúc Mừng 20/10 🎉</button>
     </div>
 
-    <a href="#home" class="back-button">Γ¼å Vß╗ü ─Éß║ºu Trang</a>
+    <a href="#home" class="back-button">⬆ Về Đầu Trang</a>
   </section>
 
-  <!-- MODAL Bß╗¿C TH╞» Tß╗░ ─Éß╗ÿNG ─É├üNH CHß╗« -->
+  <!-- MODAL BỨC THƯ TỰ ĐỘNG ĐÁNH CHỮ -->
   <div class="modal-overlay" id="letterModal">
     <div class="modal-card">
       <button class="modal-close" id="closeModalBtn">&times;</button>
       
-      <!-- Hai ch├║ m├¿o mewmew nhß║úy nh├│t hai b├¬n thiß╗çp -->
+      <!-- Hai chú mèo mewmew nhảy nhót hai bên thiệp -->
       <div class="modal-top-deco">
         <img class="modal-cat" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
         <img style="width: 70px; height: auto;" src="image/giftbox.png" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/giftbox.png'" alt="Gift">
         <img class="modal-cat" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
       </div>
 
-      <h3 class="modal-title">Th╞░ Tß╗½ B├í Ph├║c Gß╗¡i <span id="modalFriendName">Chß╗ï ├ünh</span></h3>
+      <h3 class="modal-title">Thư Từ Bá Phúc Gửi <span id="modalFriendName">Chị Ánh</span></h3>
       <div class="modal-letter-body" id="typingLetter"></div>
 
       <div class="modal-actions">
-        <button class="modal-btn" onclick="fireMoreConfetti()">Tung Hoa Ch├║c Mß╗½ng ≡ƒî╕</button>
+        <button class="modal-btn" onclick="fireMoreConfetti()">Tung Hoa Chúc Mừng 🌸</button>
       </div>
     </div>
   </div>
 
   <footer>
-    <p>Th╞░ tß╗½ <strong>B├í Ph├║c</strong> gß╗¡i tß║╖ng <strong>Chß╗ï ├ünh</strong> nh├ón ng├áy 20/10 ≡ƒÆû</p>
+    <p>Thư từ <strong>Bá Phúc</strong> gửi tặng <strong>Chị Ánh</strong> nhân ngày 20/10 💖</p>
   </footer>
 
   <script>
 
-    // 1. C├üNH HOA & SAO R╞áI TR├èN CANVAS
+    // 1. CÁNH HOA & SAO RƠI TRÊN CANVAS
     const canvas = document.getElementById('petalCanvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -565,7 +565,7 @@
     });
 
     const petals = [];
-    const petalEmojis = ['≡ƒî╕', '≡ƒî║', '≡ƒî╖', 'Γ£¿', '≡ƒÆû', '≡ƒºï', '≡ƒî╗'];
+    const petalEmojis = ['🌸', '🌺', '🌷', '✨', '💖', '🧋', '🌻'];
 
     class Petal {
       constructor() { this.reset(); }
@@ -611,7 +611,7 @@
     }
     animatePetals();
 
-    // 2. NHß║áC Nß╗ÇN
+    // 2. NHẠC NỀN
     const musicBtn = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     const bgMusic = document.getElementById('bgMusic');
@@ -621,12 +621,12 @@
       if (isMusicPlaying) {
         bgMusic.pause();
         musicBtn.classList.remove('playing');
-        musicIcon.textContent = '≡ƒöç';
+        musicIcon.textContent = '🔇';
         isMusicPlaying = false;
       } else {
         bgMusic.play().then(() => {
           musicBtn.classList.add('playing');
-          musicIcon.textContent = '≡ƒÄ╡';
+          musicIcon.textContent = '🎵';
           isMusicPlaying = true;
         }).catch(() => {});
       }
@@ -637,7 +637,7 @@
       if (!isMusicPlaying) {
         bgMusic.play().then(() => {
           musicBtn.classList.add('playing');
-          musicIcon.textContent = '≡ƒÄ╡';
+          musicIcon.textContent = '🎵';
           isMusicPlaying = true;
         }).catch(() => {});
       }
@@ -647,14 +647,14 @@
     window.addEventListener('click', autoPlayOnFirstInteraction);
     window.addEventListener('touchstart', autoPlayOnFirstInteraction);
 
-    // 3. M├êO MEW MEW T╞»╞áNG T├üC
+    // 3. MÈO MEW MEW TƯƠNG TÁC
     const catSpeech = document.getElementById('catSpeech');
     const catPhrases = [
-      'Ch├║c chß╗ï ├ünh 20/10 ngß║¡p tr├án niß╗üm vui nha! ≡ƒî╕',
-      'Uß╗æng tr├á sß╗»a ho├ái h├┤ng mß║¡p n├¿! ≡ƒºï',
-      'Lu├┤n trß║╗ trung xinh ─æß║╣p nghen! Γ£¿',
-      'C├┤ng viß╗çc hanh th├┤ng thuß║¡n lß╗úi! ≡ƒÆ»',
-      'Meow meow~ Ch├║c chß╗ï ├ünh lu├┤n hß║ính ph├║c! ≡ƒÉ╛'
+      'Chúc chị Ánh 20/10 ngập tràn niềm vui nha! 🌸',
+      'Uống trà sữa hoài hông mập nè! 🧋',
+      'Luôn trẻ trung xinh đẹp nghen! ✨',
+      'Công việc hanh thông thuận lợi! 💯',
+      'Meow meow~ Chúc chị Ánh luôn hạnh phúc! 🐾'
     ];
     let catIndex = 0;
     function catInteract() {
@@ -663,12 +663,12 @@
       cardPop(document.getElementById('cornerCat'));
     }
 
-    // 4. HIß╗åU ß╗¿NG CLICK CHUß╗ÿT
+    // 4. HIỆU ỨNG CLICK CHUỘT
     document.addEventListener('click', (e) => {
       if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
       const burst = document.createElement('div');
       burst.className = 'click-burst';
-      const emojis = ['≡ƒî╕', 'Γ£¿', '≡ƒÆû', '≡ƒºï', '≡ƒî╖', '≡ƒÉ▒'];
+      const emojis = ['🌸', '✨', '💖', '🧋', '🌷', '🐱'];
       burst.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       burst.style.left = e.clientX + 'px';
       burst.style.top = e.clientY + 'px';
@@ -676,7 +676,7 @@
       setTimeout(() => burst.remove(), 1000);
     });
 
-    // 5. Hß╗ÿP QU├Ç T╞»╞áNG T├üC & Bß╗¿C TH╞» ─É├üNH CHß╗«
+    // 5. HỘP QUÀ TƯƠNG TÁC & BỨC THƯ ĐÁNH CHỮ
     const giftBoxBtn = document.getElementById('giftBoxBtn');
     const letterModal = document.getElementById('letterModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -684,20 +684,20 @@
     let typingTimer = null;
 
     function getLetterText() {
-      return `Gß╗¡i chß╗ï ├ünh! Γ£¿
+      return `Gửi chị Ánh! ✨
 
-H├┤m nay l├á ng├áy Phß╗Ñ nß╗» Viß╗çt Nam 20/10, em ch├║c chß╗ï mß╗Öt ng├áy thß║¡t nhiß╗üu niß╗üm vui, lu├┤n rß║íng rß╗í v├á tr├án ngß║¡p tiß║┐ng c╞░ß╗¥i!
+Hôm nay là ngày Phụ nữ Việt Nam 20/10, em chúc chị một ngày thật nhiều niềm vui, luôn rạng rỡ và tràn ngập tiếng cười!
 
-≡ƒî╕ Ch├║c cho chß╗ï:
-- Nhan sß║»c ng├áy c├áng th─âng hß║íng, trß║╗ trung xinh ─æß║╣p bß║Ñt chß║Ñp thß╗¥i gian.
-- Tr├á sß╗»a uß╗æng thß║ú ga m├á v├│c d├íng vß║½n chuß║⌐n chß╗ënh.
-- C├┤ng viß╗çc su├┤n sß║╗ hanh th├┤ng, deadline tß╗▒ biß║┐n mß║Ñt, th─âng tiß║┐n v├╣ v├╣.
-- Tiß╗ün ─æß║ºy t├║i, may mß║»n ngß║¡p tr├án, tha hß╗ô mua sß║»m shopping!
-- Lu├┤n giß╗» nß╗Ñ c╞░ß╗¥i t╞░╞íi tß║»n, an nhi├¬n v├á ─æ├│n nhß║¡n thß║¡t nhiß╗üu ─æiß╗üu ngß╗ìt ng├áo nhß║Ñt!
+🌸 Chúc cho chị:
+- Nhan sắc ngày càng thăng hạng, trẻ trung xinh đẹp bất chấp thời gian.
+- Trà sữa uống thả ga mà vóc dáng vẫn chuẩn chỉnh.
+- Công việc suôn sẻ hanh thông, deadline tự biến mất, thăng tiến vù vù.
+- Tiền đầy túi, may mắn ngập tràn, tha hồ mua sắm shopping!
+- Luôn giữ nụ cười tươi tắn, an nhiên và đón nhận thật nhiều điều ngọt ngào nhất!
 
-Ch├║c chß╗ï mß╗Öt ng├áy 20/10 si├¬u hß║ính ph├║c v├á nhß║¡n ─æ╞░ß╗úc thß║¡t nhiß╗üu hoa qu├á nh├⌐! ≡ƒÆÉ
+Chúc chị một ngày 20/10 siêu hạnh phúc và nhận được thật nhiều hoa quà nhé! 💐
 
-ΓÇö From: B├í Ph├║c Γ£¿ ΓÇö`;
+— From: Bá Phúc ✨ —`;
     }
 
     function typeWriter(text, element, speed = 30) {
@@ -732,7 +732,7 @@ Ch├║c chß╗ï mß╗Öt ng├áy 20/10 si├¬u hß║ính ph├║c v├�
       if (e.target === letterModal) closeGift();
     });
 
-    // 6. PH├üO HOA CH├ÜC Mß╗¬NG
+    // 6. PHÁO HOA CHÚC MỪNG
     function triggerFireworks() {
       if (typeof confetti === 'function') {
         const count = 200;
