@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ch├║c Mß╗½ng 20/10 - Th╞░ Tß╗½ B├í Ph├║c Gß╗¡i Chß╗ï ├ünh ≡ƒî╕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #ff5e8e;
+      --primary-dark: #d82b68;
+      --primary-light: #ff8dae;
+      --secondary: #ffe5ec;
+      --text-main: #442239;
+      --text-muted: #794d6c;
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --glass-shadow: 0 12px 35px rgba(255, 94, 142, 0.16);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #fff2f6 0%, #ffe0ec 50%, #ffd4e5 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Hiß╗çu ß╗⌐ng c├ính hoa v├á ng├┤i sao r╞íi m╞░ß╗út m├á */
+    .bg-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+
+    /* N├║t nhß║íc nß╗òi g├│c m├án h├¼nh */
+    .music-btn {
+      position: fixed; top: 20px; right: 20px; z-index: 999;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #ff5e8e, #e91e63);
+      border: 3px solid #fff; color: white; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 15px rgba(233, 30, 99, 0.35);
+      transition: all 0.3s ease;
+    }
+    .music-btn:hover { transform: scale(1.1); }
+    .music-btn.playing { animation: spin 3.5s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* M├¿o Mew Mew ß╗ƒ g├│c m├án h├¼nh */
+    .corner-cat {
+      position: fixed; bottom: 20px; left: 20px; z-index: 99;
+      display: flex; align-items: flex-end; gap: 8px; cursor: pointer;
+      user-select: none;
+    }
+    .corner-cat img {
+      width: 65px; height: auto; transition: transform 0.3s ease;
+      filter: drop-shadow(0 6px 12px rgba(233, 30, 99, 0.25));
+    }
+    .corner-cat:hover img { transform: scale(1.15) translateY(-5px); }
+    .cat-bubble {
+      background: white; padding: 8px 14px; border-radius: 18px 18px 18px 0;
+      font-size: 0.82rem; font-weight: 600; color: var(--primary-dark);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1.5px solid #ffccd8;
+      max-width: 180px; animation: bounceSmall 2s infinite ease-in-out;
+    }
+    @keyframes bounceSmall {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative; min-height: 100vh; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 50px 20px 40px; z-index: 10;
+    }
+
+    .badge-date {
+      display: inline-block; padding: 8px 24px;
+      background: rgba(255, 94, 142, 0.15); border: 1px solid rgba(255, 94, 142, 0.35);
+      border-radius: 50px; color: var(--primary-dark); font-weight: 600;
+      font-size: 1rem; letter-spacing: 1px; margin-bottom: 16px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif; font-size: clamp(2.3rem, 6vw, 4.2rem);
+      font-weight: 700; color: #c71f5d; margin-bottom: 12px; line-height: 1.25;
+      animation: fadeInDown 0.8s ease-out 0.2s backwards;
+    }
+
+    .subtitle {
+      font-family: 'Dancing Script', cursive; font-size: clamp(2.2rem, 5vw, 3.4rem);
+      color: #ff3366; margin-bottom: 20px; font-weight: 700;
+      animation: fadeInDown 0.8s ease-out 0.3s backwards;
+    }
+
+    .message-hero {
+      font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;
+      margin-bottom: 30px; max-width: 650px;
+      animation: fadeInUp 0.8s ease-out 0.5s backwards;
+    }
+
+    /* Hß╗Öp qu├á t╞░╞íng t├íc */
+    .gift-container {
+      position: relative; display: inline-flex; flex-direction: column;
+      align-items: center; margin-bottom: 35px; cursor: pointer;
+      animation: fadeInUp 0.8s ease-out 0.6s backwards;
+    }
+    .gift-box-animate {
+      position: relative; animation: bounceGift 2.4s infinite ease-in-out;
+      transition: transform 0.3s ease;
+    }
+    .gift-box-animate img {
+      width: 150px; height: auto; filter: drop-shadow(0 12px 20px rgba(255, 94, 142, 0.4));
+      transition: transform 0.3s ease;
+    }
+    .gift-container:hover .gift-box-animate img { transform: scale(1.12) rotate(-5deg); }
+
+    .cat-companion {
+      position: absolute; right: -55px; bottom: 20px; width: 65px; height: auto;
+      animation: sway 2s ease-in-out infinite alternate;
+    }
+    @keyframes sway {
+      0% { transform: translateY(0) rotate(-6deg); }
+      100% { transform: translateY(-8px) rotate(6deg); }
+    }
+
+    .gift-tag {
+      background: white; padding: 8px 22px; border-radius: 30px; font-weight: 600;
+      font-size: 0.95rem; color: var(--primary-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-top: 10px; border: 1.5px solid #ffb6c1;
+    }
+    @keyframes bounceGift {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-12px); }
+      60% { transform: translateY(-6px); }
+    }
+
+    .nav-buttons {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.7s backwards;
+    }
+    .nav-button {
+      padding: 13px 34px; font-size: 1.05rem; font-weight: 600; border-radius: 50px;
+      text-decoration: none; color: white; transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 6px 20px rgba(255, 94, 142, 0.35);
+    }
+    .btn-wishes { background: linear-gradient(135deg, #ff5e8e, #c44569); }
+    .btn-fun { background: linear-gradient(135deg, #ff85a1, #ff5e8e); }
+    .nav-button:hover { transform: translateY(-4px) scale(1.03); }
+
+    .section {
+      min-height: 85vh; padding: 85px 20px; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      position: relative; z-index: 10;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 700; color: #c71f5d; margin-bottom: 12px; text-align: center;
+    }
+    .section-desc {
+      color: var(--text-muted); text-align: center; max-width: 600px;
+      margin-bottom: 45px; font-size: 1.05rem;
+    }
+
+    .wishes-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 26px; max-width: 1200px; width: 100%;
+    }
+    .wish-card {
+      background: var(--card-bg); padding: 32px 26px; border-radius: 22px;
+      box-shadow: var(--glass-shadow); border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.35s ease; cursor: pointer;
+    }
+    .wish-card:hover { transform: translateY(-8px); border-color: rgba(255, 94, 142, 0.4); }
+    .wish-icon { font-size: 44px; margin-bottom: 14px; display: inline-block; }
+    .wish-title { font-size: 1.35rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; }
+    .wish-text { font-size: 0.98rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* Modal mß╗ƒ thiß╗çp */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(6px); z-index: 1000;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      background: white; width: 100%; max-width: 620px; border-radius: 28px;
+      padding: 38px 30px; text-align: center; position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3); transform: scale(0.85) translateY(20px);
+      transition: all 0.4s ease; border: 3px solid #ffe0ea;
+      max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    }
+    .modal-overlay.active .modal-card { transform: scale(1) translateY(0); }
+    .modal-close {
+      position: absolute; top: 16px; right: 18px; background: #f5f5f5;
+      border: none; width: 36px; height: 36px; border-radius: 50%;
+      font-size: 18px; cursor: pointer; color: #666;
+    }
+    .modal-top-deco { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 12px; }
+    .modal-cat { width: 60px; height: auto; }
+    .modal-title { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 15px; }
+    .modal-letter-body {
+      background: #fff8fa; border: 2px dashed #ffb6c9; border-radius: 18px;
+      padding: 22px; text-align: left; font-size: 1.05rem; line-height: 1.85;
+      color: #4a223c; min-height: 180px; margin-bottom: 22px; white-space: pre-line;
+    }
+    .modal-btn {
+      padding: 12px 28px; background: linear-gradient(135deg, #ff5e8e, #e91e63);
+      color: white; border: none; border-radius: 50px; font-size: 1rem;
+      font-weight: 600; cursor: pointer; box-shadow: 0 6px 18px rgba(233, 30, 99, 0.35);
+    }
+
+    .click-burst {
+      position: fixed; pointer-events: none; transform: translate(-50%, -50%);
+      font-size: 24px; animation: floatBurst 1s ease-out forwards; z-index: 9999;
+    }
+    @keyframes floatBurst {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+      100% { opacity: 0; transform: translate(-50%, -120px) scale(1.4) rotate(25deg); }
+    }
+
+    .back-button {
+      margin-top: 40px; padding: 12px 34px; font-size: 1rem; font-weight: 600;
+      background: linear-gradient(135deg, #ff5e8e, #c44569); color: white;
+      border: none; border-radius: 50px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    footer { text-align: center; padding: 30px 20px; color: var(--text-muted); font-size: 0.95rem; }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-25px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Lß╗£I NHß║«N NHß╗ª BASE STYLES */
+    .note-card {
+      max-width: 800px; width: 100%; background: white;
+      padding: 45px 35px; border-radius: 26px;
+      box-shadow: var(--glass-shadow); text-align: center;
+    }
+    .note-text {
+      font-size: 1.15rem; line-height: 1.9; color: #552844; margin-bottom: 20px;
+    }
+    .note-author {
+      font-family: 'Dancing Script', cursive; font-size: 2.1rem;
+      color: var(--primary-dark); font-weight: 700; margin-bottom: 22px;
+    }
+
+    /* Tß╗ÉI ╞»U TO├ÇN DIß╗åN CHO ─ÉIß╗åN THOß║áI & FORM THIß╗åP */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 70px 16px 35px;
+        min-height: 100svh;
+      }
+      .badge-date {
+        font-size: 0.82rem;
+        padding: 6px 16px;
+        margin-bottom: 12px;
+      }
+      .title {
+        font-size: 2.05rem;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 2.1rem;
+        margin-bottom: 14px;
+      }
+      .message-hero {
+        font-size: 0.96rem;
+        line-height: 1.65;
+        margin-bottom: 24px;
+        padding: 0 4px;
+      }
+      .gift-container {
+        margin-bottom: 28px;
+      }
+      .gift-box-animate img {
+        width: 125px;
+      }
+      .cat-companion {
+        right: -18px;
+        bottom: 12px;
+        width: 48px;
+      }
+      .gift-tag {
+        font-size: 0.82rem;
+        padding: 6px 16px;
+        max-width: 95%;
+        margin-top: 8px;
+        line-height: 1.4;
+      }
+      .nav-buttons {
+        gap: 10px;
+        width: 100%;
+        max-width: 320px;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .nav-button {
+        padding: 11px 18px;
+        font-size: 0.9rem;
+        flex: 1;
+        justify-content: center;
+      }
+      .section {
+        padding: 60px 16px;
+        min-height: auto;
+      }
+      .section-title {
+        font-size: 1.85rem;
+        margin-bottom: 10px;
+      }
+      .section-desc {
+        font-size: 0.92rem;
+        margin-bottom: 30px;
+        padding: 0 4px;
+      }
+      .wishes-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .wish-card {
+        padding: 24px 18px;
+        border-radius: 18px;
+      }
+      .wish-icon {
+        font-size: 38px;
+        margin-bottom: 10px;
+      }
+      .wish-title {
+        font-size: 1.2rem;
+      }
+      .wish-text {
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .note-card {
+        padding: 28px 18px;
+        border-radius: 20px;
+      }
+      .note-text {
+        font-size: 0.96rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+      .note-author {
+        font-size: 1.8rem;
+        margin-bottom: 18px;
+      }
+
+      /* FORM THIß╗åP Mß╗₧ QU├Ç TR├èN ─ÉIß╗åN THOß║áI */
+      .modal-overlay {
+        padding: 12px;
+        align-items: center;
+      }
+      .modal-card {
+        padding: 24px 16px 20px;
+        border-radius: 22px;
+        max-height: 88vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+      }
+      .modal-close {
+        top: 10px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+      .modal-top-deco {
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      .modal-cat {
+        width: 44px;
+      }
+      .modal-title {
+        font-size: 1.75rem;
+        margin-bottom: 10px;
+        line-height: 1.25;
+      }
+      .modal-letter-body {
+        padding: 14px 14px;
+        font-size: 0.92rem;
+        line-height: 1.7;
+        max-height: 48vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+      .modal-btn {
+        padding: 11px 22px;
+        font-size: 0.92rem;
+        width: 100%;
+        max-width: 260px;
+      }
+
+      .music-btn {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+      }
+      .corner-cat {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- N├║t nhß║íc nß╗ün -->
+  <button id="musicToggle" class="music-btn" title="Bß║¡t/Tß║»t nhß║íc nß╗ün">
+    <span id="musicIcon">≡ƒÄ╡</span>
+  </button>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- M├¿o Mew Mew t╞░╞íng t├íc ß╗ƒ g├│c m├án h├¼nh -->
+  <div class="corner-cat" id="cornerCat" onclick="catInteract()">
+    <img src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew Cat">
+    <div class="cat-bubble" id="catSpeech">Ch├áo chß╗ï ├ünh! Ch├║c chß╗ï 20/10 vui vß║╗ nha! ≡ƒÉ╛</div>
+  </div>
+
+  <!-- C├ính hoa r╞íi Canvas -->
+  <canvas id="petalCanvas" class="bg-canvas"></canvas>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="badge-date">Γ£¿ 20 Th├íng 10 ΓÇó Lß╗¥i Ch├║c Tß╗½ B├í Ph├║c Γ£¿</div>
+    <h1 class="title">Ch├║c Mß╗½ng Ng├áy 20/10</h1>
+    <h2 class="subtitle">Gß╗¡i <span id="displayFriendName">Chß╗ï ├ünh</span>! ≡ƒî╕</h2>
+
+    <p class="message-hero">
+      Ch├║c chß╗ï ├ünh mß╗Öt ng├áy 20/10 ngß║¡p tr├án niß╗üm vui, nß╗Ñ c╞░ß╗¥i lu├┤n rß║íng rß╗í, lu├┤n t╞░╞íi trß║╗ v├á hß║ính ph├║c tr├¬n mß╗ìi chß║╖ng ─æ╞░ß╗¥ng nh├⌐! Γ£¿
+    </p>
+
+    <!-- Hß╗Öp qu├á t╞░╞íng t├íc vß╗¢i ß║únh giftbox.png v├á mewmew.gif -->
+    <div class="gift-container" id="giftBoxBtn" title="Bß║Ñm v├áo ─æß╗â mß╗ƒ qu├á bß║Ñt ngß╗¥!">
+      <div class="gift-box-animate">
+        <img src="image/giftbox.png" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/giftbox.png'" alt="Hß╗Öp qu├á 20/10">
+        <img class="cat-companion" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
+      </div>
+      <div class="gift-tag">
+        <span>≡ƒÄü Nhß║Ñp ─æß╗â mß╗ƒ thiß╗çp d├ánh cho chß╗ï ├ünh!</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+      <a href="#wishes" class="nav-button btn-wishes"><span>≡ƒÆî Lß╗¥i Ch├║c 20/10</span></a>
+      <a href="#friendship" class="nav-button btn-fun"><span>≡ƒîƒ Lß╗¥i Nhß║»n Nhß╗º</span></a>
+    </div>
+  </section>
+
+  <!-- Lß╗£I CH├ÜC D├ÇNH CHO CHß╗è ├üNH -->
+  <section class="section" id="wishes">
+    <h2 class="section-title">Lß╗¥i Ch├║c D├ánh Cho Chß╗ï ├ünh</h2>
+    <p class="section-desc">Gß╗¡i trß╗ìn nhß╗»ng ─æiß╗üu ngß╗ìt ng├áo v├á tuyß╗çt vß╗¥i nhß║Ñt ─æß║┐n chß╗ï ├ünh nh├ón ng├áy Phß╗Ñ nß╗» Viß╗çt Nam! ≡ƒî╕</p>
+
+    <div class="wishes-grid">
+      <div class="wish-card" onclick="cardPop(this)">
+        <div class="wish-icon">≡ƒºï</div>
+        <h3 class="wish-title">Tr├á Sß╗»a Kh├┤ng B├⌐o</h3>
+        <p class="wish-text">Uß╗æng bao nhi├¬u ly tr├á sß╗»a full-topping c┼⌐ng kh├┤ng sß╗ú t─âng c├ón, ─ân ngon ngß╗º kß╗╣ v├á t├óm hß╗ôn l├║c n├áo c┼⌐ng ph╞íi phß╗¢i!</p>
+      </div>
+
+      <div class="wish-card" onclick="cardPop(this)">
+        <div class="wish-icon">≡ƒÆ»</div>
+        <h3 class="wish-title">Deadline Tß╗▒ Biß║┐n Mß║Ñt</h3>
+        <p class="wish-text">C├┤ng viß╗çc hanh th├┤ng thuß║¡n lß╗úi, sß║┐p qu├╜ ─æß╗ông nghiß╗çp th╞░╞íng, mß╗ìi sß╗▒ may mß║»n v├á deadline tß╗▒ ─æß╗Öng ho├án th├ánh!</p>
+      </div>
+
+      <div class="wish-card" onclick="cardPop(this)">
+        <div class="wish-icon">≡ƒÆ╕</div>
+        <h3 class="wish-title">V├¡ Tiß╗ün D├áy Cß╗Öm</h3>
+        <p class="wish-text">T├ái khoß║ún l├║c n├áo c┼⌐ng 'ting ting', may mß║»n ngß║¡p tr├án, tha hß╗ô shopping, du lß╗ïch mu├┤n n╞íi m├á kh├┤ng cß║ºn nh├¼n gi├í!</p>
+      </div>
+
+      <div class="wish-card" onclick="cardPop(this)">
+        <div class="wish-icon">≡ƒÆû</div>
+        <h3 class="wish-title">Lu├┤n ─É╞░ß╗úc Y├¬u Th╞░╞íng</h3>
+        <p class="wish-text">Lu├┤n ─æ╞░ß╗úc y├¬u th╞░╞íng, n├óng niu, trß║╗ m├úi kh├┤ng gi├á v├á ─æ├│n nhß║¡n nhß╗»ng ─æiß╗üu ngß╗ìt ng├áo nhß║Ñt cß╗ºa cuß╗Öc sß╗æng!</p>
+      </div>
+
+      <div class="wish-card" onclick="cardPop(this)">
+        <div class="wish-icon">≡ƒîê</div>
+        <h3 class="wish-title">Lu├┤n Vui Vß║╗ & Rß║íng Rß╗í</h3>
+        <p class="wish-text">Mß╗ùi ng├áy tr├┤i qua ─æß╗üu l├á mß╗Öt ng├áy ├╜ ngh─⌐a, bß╗¢t quß║íu, bß╗¢t lo toan v├á lu├┤n nß╗ƒ nß╗Ñ c╞░ß╗¥i thß║¡t t╞░╞íi!</p>
+      </div>
+    </div>
+
+    <a href="#home" class="back-button">Γ¼å Vß╗ü ─Éß║ºu Trang</a>
+  </section>
+
+  <!-- Lß╗£I NHß║«N NHß╗ª -->
+  <section class="section" id="friendship">
+    <h2 class="section-title">Nhß║»n Nhß╗º ─É├┤i Lß╗¥i ≡ƒîƒ</h2>
+    <div class="note-card">
+      <p class="note-text">
+        Gß╗¡i <strong id="friendNameNote" style="color: var(--primary-dark);">chß╗ï ├ünh</strong>, cß║úm ╞ín chß╗ï v├¼ ─æ├ú lu├┤n l├á mß╗Öt ng╞░ß╗¥i chß╗ï dß╗à th╞░╞íng, nhiß╗çt t├¼nh v├á ngß║¡p tr├án n─âng l╞░ß╗úng t├¡ch cß╗▒c!
+      </p>
+      <p class="note-text">
+        Nh├ón dß╗ïp 20/10, em ch├║c chß╗ï lu├┤n giß╗» ─æ╞░ß╗úc nß╗Ñ c╞░ß╗¥i rß║íng rß╗í, ng├áy c├áng trß║╗ ─æß║╣p, th├ánh c├┤ng trong c├┤ng viß╗çc v├á hß║ính ph├║c trong cuß╗Öc sß╗æng. H├úy nhß╗¢ rß║▒ng chß╗ï lu├┤n xß╗⌐ng ─æ├íng vß╗¢i nhß╗»ng ─æiß╗üu tß╗æt ─æß║╣p nhß║Ñt trong cuß╗Öc sß╗æng n├áy!
+      </p>
+      <div class="note-author">
+        ΓÇö Ng╞░ß╗¥i gß╗¡i: B├í Ph├║c ≡ƒÆû ΓÇö
+      </div>
+      <button class="modal-btn" onclick="triggerFireworks()">≡ƒÄë Bß║»n Ph├ío Hoa Ch├║c Mß╗½ng 20/10 ≡ƒÄë</button>
+    </div>
+
+    <a href="#home" class="back-button">Γ¼å Vß╗ü ─Éß║ºu Trang</a>
+  </section>
+
+  <!-- MODAL Bß╗¿C TH╞» Tß╗░ ─Éß╗ÿNG ─É├üNH CHß╗« -->
+  <div class="modal-overlay" id="letterModal">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+      
+      <!-- Hai ch├║ m├¿o mewmew nhß║úy nh├│t hai b├¬n thiß╗çp -->
+      <div class="modal-top-deco">
+        <img class="modal-cat" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
+        <img style="width: 70px; height: auto;" src="image/giftbox.png" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/giftbox.png'" alt="Gift">
+        <img class="modal-cat" src="image/mewmew.gif" onerror="this.src='https://raw.githubusercontent.com/TranNinhTinh/20th10/main/image/mewmew.gif'" alt="Mew Mew">
+      </div>
+
+      <h3 class="modal-title">Th╞░ Tß╗½ B├í Ph├║c Gß╗¡i <span id="modalFriendName">Chß╗ï ├ünh</span></h3>
+      <div class="modal-letter-body" id="typingLetter"></div>
+
+      <div class="modal-actions">
+        <button class="modal-btn" onclick="fireMoreConfetti()">Tung Hoa Ch├║c Mß╗½ng ≡ƒî╕</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Th╞░ tß╗½ <strong>B├í Ph├║c</strong> gß╗¡i tß║╖ng <strong>Chß╗ï ├ünh</strong> nh├ón ng├áy 20/10 ≡ƒÆû</p>
+  </footer>
+
+  <script>
+
+    // 1. C├üNH HOA & SAO R╞áI TR├èN CANVAS
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const petals = [];
+    const petalEmojis = ['≡ƒî╕', '≡ƒî║', '≡ƒî╖', 'Γ£¿', '≡ƒÆû', '≡ƒºï', '≡ƒî╗'];
+
+    class Petal {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.emoji = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+        this.size = Math.random() * 18 + 14;
+        this.speedY = Math.random() * 1.5 + 0.8;
+        this.speedX = Math.random() * 1.2 - 0.6;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 2;
+        this.opacity = Math.random() * 0.7 + 0.3;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.01) * 0.5;
+        this.rotation += this.rotSpeed;
+        if (this.y > height + 50) {
+          this.reset();
+          this.y = -20;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+        ctx.font = `${this.size}px serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.emoji, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 30; i++) petals.push(new Petal());
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, width, height);
+      petals.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    // 2. NHß║áC Nß╗ÇN
+    const musicBtn = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const bgMusic = document.getElementById('bgMusic');
+    let isMusicPlaying = false;
+
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        bgMusic.pause();
+        musicBtn.classList.remove('playing');
+        musicIcon.textContent = '≡ƒöç';
+        isMusicPlaying = false;
+      } else {
+        bgMusic.play().then(() => {
+          musicBtn.classList.add('playing');
+          musicIcon.textContent = '≡ƒÄ╡';
+          isMusicPlaying = true;
+        }).catch(() => {});
+      }
+    }
+    musicBtn.addEventListener('click', toggleMusic);
+
+    function autoPlayOnFirstInteraction() {
+      if (!isMusicPlaying) {
+        bgMusic.play().then(() => {
+          musicBtn.classList.add('playing');
+          musicIcon.textContent = '≡ƒÄ╡';
+          isMusicPlaying = true;
+        }).catch(() => {});
+      }
+      window.removeEventListener('click', autoPlayOnFirstInteraction);
+      window.removeEventListener('touchstart', autoPlayOnFirstInteraction);
+    }
+    window.addEventListener('click', autoPlayOnFirstInteraction);
+    window.addEventListener('touchstart', autoPlayOnFirstInteraction);
+
+    // 3. M├êO MEW MEW T╞»╞áNG T├üC
+    const catSpeech = document.getElementById('catSpeech');
+    const catPhrases = [
+      'Ch├║c chß╗ï ├ünh 20/10 ngß║¡p tr├án niß╗üm vui nha! ≡ƒî╕',
+      'Uß╗æng tr├á sß╗»a ho├ái h├┤ng mß║¡p n├¿! ≡ƒºï',
+      'Lu├┤n trß║╗ trung xinh ─æß║╣p nghen! Γ£¿',
+      'C├┤ng viß╗çc hanh th├┤ng thuß║¡n lß╗úi! ≡ƒÆ»',
+      'Meow meow~ Ch├║c chß╗ï ├ünh lu├┤n hß║ính ph├║c! ≡ƒÉ╛'
+    ];
+    let catIndex = 0;
+    function catInteract() {
+      catIndex = (catIndex + 1) % catPhrases.length;
+      catSpeech.textContent = catPhrases[catIndex];
+      cardPop(document.getElementById('cornerCat'));
+    }
+
+    // 4. HIß╗åU ß╗¿NG CLICK CHUß╗ÿT
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
+      const burst = document.createElement('div');
+      burst.className = 'click-burst';
+      const emojis = ['≡ƒî╕', 'Γ£¿', '≡ƒÆû', '≡ƒºï', '≡ƒî╖', '≡ƒÉ▒'];
+      burst.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      burst.style.left = e.clientX + 'px';
+      burst.style.top = e.clientY + 'px';
+      document.body.appendChild(burst);
+      setTimeout(() => burst.remove(), 1000);
+    });
+
+    // 5. Hß╗ÿP QU├Ç T╞»╞áNG T├üC & Bß╗¿C TH╞» ─É├üNH CHß╗«
+    const giftBoxBtn = document.getElementById('giftBoxBtn');
+    const letterModal = document.getElementById('letterModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const typingLetter = document.getElementById('typingLetter');
+    let typingTimer = null;
+
+    function getLetterText() {
+      return `Gß╗¡i chß╗ï ├ünh! Γ£¿
+
+H├┤m nay l├á ng├áy Phß╗Ñ nß╗» Viß╗çt Nam 20/10, em ch├║c chß╗ï mß╗Öt ng├áy thß║¡t nhiß╗üu niß╗üm vui, lu├┤n rß║íng rß╗í v├á tr├án ngß║¡p tiß║┐ng c╞░ß╗¥i!
+
+≡ƒî╕ Ch├║c cho chß╗ï:
+- Nhan sß║»c ng├áy c├áng th─âng hß║íng, trß║╗ trung xinh ─æß║╣p bß║Ñt chß║Ñp thß╗¥i gian.
+- Tr├á sß╗»a uß╗æng thß║ú ga m├á v├│c d├íng vß║½n chuß║⌐n chß╗ënh.
+- C├┤ng viß╗çc su├┤n sß║╗ hanh th├┤ng, deadline tß╗▒ biß║┐n mß║Ñt, th─âng tiß║┐n v├╣ v├╣.
+- Tiß╗ün ─æß║ºy t├║i, may mß║»n ngß║¡p tr├án, tha hß╗ô mua sß║»m shopping!
+- Lu├┤n giß╗» nß╗Ñ c╞░ß╗¥i t╞░╞íi tß║»n, an nhi├¬n v├á ─æ├│n nhß║¡n thß║¡t nhiß╗üu ─æiß╗üu ngß╗ìt ng├áo nhß║Ñt!
+
+Ch├║c chß╗ï mß╗Öt ng├áy 20/10 si├¬u hß║ính ph├║c v├á nhß║¡n ─æ╞░ß╗úc thß║¡t nhiß╗üu hoa qu├á nh├⌐! ≡ƒÆÉ
+
+ΓÇö From: B├í Ph├║c Γ£¿ ΓÇö`;
+    }
+
+    function typeWriter(text, element, speed = 30) {
+      element.innerHTML = '';
+      let i = 0;
+      if (typingTimer) clearInterval(typingTimer);
+      typingTimer = setInterval(() => {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typingTimer);
+        }
+      }, speed);
+    }
+
+    function openGift() {
+      letterModal.classList.add('active');
+      triggerFireworks();
+      typeWriter(getLetterText(), typingLetter);
+      if (!isMusicPlaying) toggleMusic();
+    }
+
+    function closeGift() {
+      letterModal.classList.remove('active');
+      if (typingTimer) clearInterval(typingTimer);
+    }
+
+    giftBoxBtn.addEventListener('click', openGift);
+    closeModalBtn.addEventListener('click', closeGift);
+    letterModal.addEventListener('click', (e) => {
+      if (e.target === letterModal) closeGift();
+    });
+
+    // 6. PH├üO HOA CH├ÜC Mß╗¬NG
+    function triggerFireworks() {
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = { origin: { y: 0.7 } };
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+        fire(0.25, { spread: 26, startVelocity: 55, colors: ['#ff5e8e', '#ffccd5'] });
+        fire(0.2, { spread: 60, colors: ['#ffd700', '#ff8dae'] });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, colors: ['#e91e63', '#ffffff'] });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+      }
+    }
+
+    function fireMoreConfetti() { triggerFireworks(); }
+
+    function cardPop(el) {
+      if (typeof confetti === 'function') {
+        const rect = el.getBoundingClientRect();
+        confetti({
+          particleCount: 25,
+          spread: 50,
+          origin: {
+            x: (rect.left + rect.width / 2) / window.innerWidth,
+            y: (rect.top + rect.height / 2) / window.innerHeight
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
